@@ -3,10 +3,10 @@ version: "3.9"
 services:
     prepare:
       image: alpine
-      working_dir: /
+      working_dir: /app
       volumes:
-          - .:/
-      command: touch acme.json && chmod 600 acme.json
+          - .:/app
+      command: ['sh','-c','touch acme.json && chmod 600 acme.json']
 
     traefik:
       image: ${TRAEFIK_IMAGE}
