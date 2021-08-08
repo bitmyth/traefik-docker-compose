@@ -13,7 +13,7 @@ services:
       depends_on:
         - prepare
       ports:
-        # - "80:80"
+        - "80:80"
         - "443:443"
       volumes:
           - ./traefik.toml:/etc/traefik/traefik.toml
