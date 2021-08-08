@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+    prepare:
+      image: alpine
+      working_dir: /
+      volumes:
+          - .:/
+      command: touch acme.json && chmod 600 acme.json
+
+    traefik:
+      image: ${TRAEFIK_IMAGE}
+      depends_on:
+        - prepare
+      ports:
+        # - "80:80"
+        - "443:443"
+      volumes:
+          - ./traefik.toml:/etc/traefik/traefik.toml
+          - ./config:/etc/traefik/config
+          - ./acme.json:/acme.json

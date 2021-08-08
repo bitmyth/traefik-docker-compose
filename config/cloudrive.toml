@@ -1,0 +1,12 @@
+[http]
+  [http.routers]
+    [http.routers.cloudrive]
+      rule = "Host(`drive.kaifalu.com`)"
+      service = "cloudrive"
+      [http.routers.cloudrive.tls]
+        certResolver = "myresolver"
+
+  [http.services]
+   [http.services.cloudrive.loadBalancer]
+     [[http.services.cloudrive.loadBalancer.servers]]
+       url = "http://172.26.8.26:5212"

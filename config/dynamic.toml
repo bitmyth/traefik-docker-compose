@@ -1,0 +1,36 @@
+[http]
+  [http.routers]
+    [http.routers.Router-1]
+      # By default, routers listen to every entry points
+      rule = "Host(`etool.space`)"
+      service = "service-1"
+
+    [http.routers.my-https-router]
+      rule = "Host(`etool.space`) || Host(`blog.etool.space`)"
+      service = "service-2"
+      [http.routers.my-https-router.tls]
+        certResolver = "myresolver"
+        [[http.routers.my-https-router.tls.domains]]
+          main = "etool.space"
+          sans = ["api.etool.space","blog.etool.space","drive.etool.space"]
+
+    [http.routers.my-api]
+      rule = "Host(`traefik.etool.space`) && (PathPrefix(`/api`) || PathPrefix(`/dashboard`))"
+      service = "api@internal"
+      middlewares = ["auth"]
+      [http.routers.my-api.tls]
+        certResolver = "myresolver"
+
+  
+  [http.services]
+    [http.services.service-1.loadBalancer]
+      [[http.services.service-1.loadBalancer.servers]]
+        url = "http://172.26.8.26:7778"
+    [http.services.service-2.loadBalancer]
+      [[http.services.service-2.loadBalancer.servers]]
+        url = "http://172.26.8.26:7777"
+
+  [http.middlewares.auth.basicAuth]
+    users = [
+      "gsh:$apr1$X8u10LaT$bNquJc3Ng.UDcZvD/MBJx.",
+    ]

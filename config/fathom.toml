@@ -1,0 +1,12 @@
+[http]
+  [http.routers]
+    [http.routers.fathom]
+      rule = "Host(`fathom.kaifalu.com`)"
+      service = "fathom"
+      [http.routers.fathom.tls]
+        certResolver = "myresolver"
+
+  [http.services]
+   [http.services.fathom.loadBalancer]
+     [[http.services.fathom.loadBalancer.servers]]
+       url = "http://172.26.8.26:9000"

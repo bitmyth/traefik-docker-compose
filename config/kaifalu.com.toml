@@ -1,0 +1,25 @@
+[http]
+  [http.routers]
+    [http.routers.blog-https]
+      rule = "Host(`kaifalu.com`) || Host(`api.kaifalu.com`) || Host(`blog.kaifalu.com`)"
+      service = "blog"
+      [http.routers.blog-https.tls]
+        certResolver = "myresolver"
+        [[http.routers.blog-https.tls.domains]]
+          main = "kaifalu.com"
+          sans = ["blog.kaifalu.com","admin.kaifalu.com","api.kaifalu.com","static.kaifalu.com"]
+
+    [http.routers.static]
+      rule = "Host(`static.kaifalu.com`)"
+      service = "service-3"
+      [http.routers.static.tls]
+        certResolver = "myresolver"
+
+  [http.services]
+   [http.services.blog.loadBalancer]
+     [[http.services.blog.loadBalancer.servers]]
+       url = "http://172.26.8.26:7779"
+
+   [http.services.service-3.loadBalancer]
+     [[http.services.service-3.loadBalancer.servers]]
+       url = "http://172.26.8.26:7777"
