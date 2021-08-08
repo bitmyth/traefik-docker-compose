@@ -173,11 +173,11 @@
    [certificatesResolvers.myresolver.acme.httpChallenge]
    # used during the challenge
    entryPoint = "web"
-[certificatesResolvers.dnsresolver.acme]
-  email = "fishis@163.com"
-  storage = "acme.json"
-  [certificatesResolvers.dnsresolver.acme.tlsChallenge]
-   # need GODADDY_API_KEY GODADDY_API_SECRET enviroment variables   
-   [certificatesResolvers.dnsresolver.acme.dnsChallenge]
-     provider = "godaddy"
-     delayBeforeCheck = 0
+# [certificatesResolvers.dnsresolver.acme]
+#   email = "fishis@163.com"
+#   storage = "acme.json"
+#   [certificatesResolvers.dnsresolver.acme.tlsChallenge]
+#    # need GODADDY_API_KEY GODADDY_API_SECRET enviroment variables   
+#    [certificatesResolvers.dnsresolver.acme.dnsChallenge]
+#      provider = "godaddy"
+#      delayBeforeCheck = 0
