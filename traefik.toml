@@ -172,7 +172,7 @@
   [certificatesResolvers.myresolver.acme.tlsChallenge]
    [certificatesResolvers.myresolver.acme.httpChallenge]
    # used during the challenge
-   entryPoint = "web"
+   # entryPoint = "web"
 # [certificatesResolvers.dnsresolver.acme]
 #   email = "fishis@163.com"
 #   storage = "acme.json"
